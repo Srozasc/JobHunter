@@ -1,0 +1,26 @@
+{
+  "project_name": "JobHunter",
+  "project_root": "/data/data/com.termux/files/home/proyectos/JobHunter",
+  "frameworks": [],
+  "entry_points": [],
+  "summary": {
+    "source_files": 1,
+    "total_lines": 1,
+    "dirs_scanned": 51
+  },
+  "key_files": [
+    {
+      "path": "README.md",
+      "size": 12,
+      "lines": 1,
+      "signatures": []
+    }
+  ],
+  "_meta": {
+    "indexed_at": 1779585718,
+    "file_count": 1,
+    "file_hashes": {
+      "README.md": 1779585716
+    }
+  }
+}
