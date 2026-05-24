@@ -30,6 +30,7 @@ schedule:
   hour: "09:00"          # formato HH:MM
 
 google_drive:
+  enabled: true                          # false = guardar CSV localmente sin Drive
   credentials_file: "credentials.json"   # OAuth2 descargado de GCP
   token_file: "token.json"               # auto-generado por OAuth2
   folder_id: ""                          # vacío = raíz

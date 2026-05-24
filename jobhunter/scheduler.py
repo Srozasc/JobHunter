@@ -8,10 +8,10 @@ from datetime import datetime, timezone
 import schedule
 from loguru import logger
 
-from jobhunter.config import AppConfig
+from jobhunter.config import AppConfig, GDriveConfig
 from jobhunter.dedup import filter_new_offers, load_history, save_history
 from jobhunter.drive.auth import get_drive_service
-from jobhunter.drive.uploader import upload_csv
+from jobhunter.drive.uploader import save_csv_local, upload_csv
 from jobhunter.linkedin.auth import ensure_session
 from jobhunter.linkedin.scraper import scrape_offers
 
@@ -70,15 +70,32 @@ def run_job(config: AppConfig) -> None:
             f"  {len(new_offers)} ofertas nuevas de {len(offers)} totales."
         )
 
-        # 4. Upload a Google Drive
-        logger.info("Paso 4/4: Subida a Google Drive...")
-        drive_service = get_drive_service(
-            credentials_file=config.google_drive.credentials_file,
-            token_file=config.google_drive.token_file,
-        )
-        file_id, web_view_link = upload_csv(
-            new_offers, drive_service, config.google_drive
-        )
+        # 4. Exportar CSV (Google Drive o local)
+        if config.google_drive.enabled:
+            logger.info("Paso 4/4: Subida a Google Drive...")
+            try:
+                drive_service = get_drive_service(
+                    credentials_file=config.google_drive.credentials_file,
+                    token_file=config.google_drive.token_file,
+                )
+                file_id, web_view_link = upload_csv(
+                    new_offers, drive_service, config.google_drive
+                )
+                export_link = web_view_link
+                logger.info(f"✅ {len(new_offers)} ofertas nuevas subidas a Google Drive")
+                logger.info(f"   Archivo: {web_view_link}")
+            except Exception as e:
+                logger.warning(f"Error subiendo a Drive ({e}). Guardando localmente...")
+                filepath = save_csv_local(new_offers, config.google_drive)
+                export_link = filepath
+                logger.info(f"✅ {len(new_offers)} ofertas nuevas guardadas localmente")
+                logger.info(f"   Archivo: {filepath}")
+        else:
+            logger.info("Paso 4/4: Google Drive deshabilitado. Guardando CSV localmente...")
+            filepath = save_csv_local(new_offers, config.google_drive)
+            export_link = filepath
+            logger.info(f"✅ {len(new_offers)} ofertas nuevas guardadas localmente")
+            logger.info(f"   Archivo: {filepath}")
 
         # Guardar historial actualizado
         save_history(history, config.dedup.history_file)
@@ -86,8 +103,6 @@ def run_job(config: AppConfig) -> None:
         elapsed = time.time() - start
         logger.info("=" * 50)
         logger.info(f"JobHunter finalizado en {elapsed:.1f}s")
-        logger.info(f"✅ {len(new_offers)} ofertas nuevas subidas a Google Drive")
-        logger.info(f"   Archivo: {web_view_link}")
 
     except Exception as e:
         elapsed = time.time() - start

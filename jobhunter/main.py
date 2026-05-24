@@ -125,7 +125,10 @@ def status():
     console.print(
         f"  📅 schedule: {config.schedule.frequency} @ {config.schedule.hour}"
     )
-    console.print(f"  🗂  drive folder: {config.google_drive.folder_id or '(raíz)'}")
+    if config.google_drive.enabled:
+        console.print(f"  🗂  destino: ☁️ Google Drive (folder: {config.google_drive.folder_id or 'raíz'})")
+    else:
+        console.print("  🗂  destino: 💾 local (data/output/)")
 
     # Historial
     console.print("\n[bold cyan]=== Historial ===")

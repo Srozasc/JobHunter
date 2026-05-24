@@ -68,6 +68,7 @@ class ScheduleConfig(BaseModel):
 
 
 class GDriveConfig(BaseModel):
+    enabled: bool = True
     credentials_file: str = "credentials.json"
     token_file: str = "token.json"
     folder_id: str = ""

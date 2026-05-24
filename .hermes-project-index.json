@@ -6,9 +6,9 @@
   ],
   "entry_points": [],
   "summary": {
-    "source_files": 36,
-    "total_lines": 5689,
-    "dirs_scanned": 285
+    "source_files": 37,
+    "total_lines": 5933,
+    "dirs_scanned": 295
   },
   "key_files": [
     {
@@ -139,6 +139,12 @@
       ]
     },
     {
+      "path": "README.md",
+      "size": 6373,
+      "lines": 196,
+      "signatures": []
+    },
+    {
       "path": "specs/03_autenticacion_linkedin.md",
       "size": 7311,
       "lines": 196,
@@ -225,31 +231,15 @@
       "size": 5120,
       "lines": 147,
       "signatures": []
-    },
-    {
-      "path": "tests/test_scraper.py",
-      "size": 5031,
-      "lines": 139,
-      "signatures": [
-        "class TestBuildSearchUrl:",
-        "def test_basic_keywords_and_location(self):",
-        "def test_url_encoding(self):",
-        "def test_date_posted_past_week(self):",
-        "def test_date_posted_past_24h(self):",
-        "def test_date_posted_past_month(self):",
-        "def test_experience_level_single(self):",
-        "def test_experience_level_multiple(self):"
-      ]
     }
   ],
   "_meta": {
-    "indexed_at": 1779597178,
-    "file_count": 36,
+    "indexed_at": 1779597360,
+    "file_count": 37,
     "file_hashes": {
-      "config.example.yaml": 1779595586,
-      "pyproject.toml": 1779595584,
-      "README.md": 1779595583,
+      "README.md": 1779597328,
       "Documentacion/setup_google_drive.md": 1779596646,
+      "Documentacion/checklist_instalacion.md": 1779597328,
       "specs/01_inicializacion_proyecto.md": 1779589256,
       "specs/02_configuracion_yaml.md": 1779589530,
       "specs/03_autenticacion_linkedin.md": 1779589804,
@@ -265,6 +255,7 @@
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
       "Documentacion/inicial/plan_accion.md": 1779588418,
+      "config.example.yaml": 1779595586,
       "jobhunter/__init__.py": 1779595585,
       "jobhunter/config.py": 1779595738,
       "jobhunter/dedup.py": 1779596341,
@@ -281,7 +272,8 @@
       "jobhunter/linkedin/scraper.py": 1779596094,
       "jobhunter/drive/__init__.py": 1779595585,
       "jobhunter/drive/uploader.py": 1779596547,
-      "jobhunter/drive/auth.py": 1779596547
+      "jobhunter/drive/auth.py": 1779596547,
+      "pyproject.toml": 1779595584
     }
   }
 }

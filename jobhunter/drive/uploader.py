@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from googleapiclient.http import MediaInMemoryUpload
 from loguru import logger
 
+from jobhunter.config import GDriveConfig
+
 
 CSV_COLUMNS = [
     "titulo",
@@ -47,6 +49,25 @@ def generate_csv(offers: list[dict]) -> io.StringIO:
 
     output.seek(0)
     return output
+
+
+def save_csv_local(offers: list[dict], config: GDriveConfig) -> str:
+    """Guarda CSV localmente en data/output/. Retorna la ruta del archivo."""
+    from pathlib import Path
+
+    output_dir = Path("data/output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    filename = f"{config.filename_prefix}_{ts}.csv"
+    filepath = output_dir / filename
+
+    csv_content = generate_csv(offers)
+    with open(filepath, "w", encoding="utf-8-sig", newline="") as f:
+        f.write(csv_content.getvalue())
+
+    logger.info(f"✅ CSV guardado localmente: {filepath}")
+    return str(filepath)
 
 
 def upload_csv(
