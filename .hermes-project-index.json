@@ -1,12 +1,14 @@
 {
   "project_name": "JobHunter",
   "project_root": "/data/data/com.termux/files/home/proyectos/JobHunter",
-  "frameworks": [],
+  "frameworks": [
+    "Python"
+  ],
   "entry_points": [],
   "summary": {
-    "source_files": 16,
-    "total_lines": 3507,
-    "dirs_scanned": 122
+    "source_files": 22,
+    "total_lines": 3621,
+    "dirs_scanned": 167
   },
   "key_files": [
     {
@@ -161,16 +163,45 @@
     },
     {
       "path": "README.md",
-      "size": 12,
+      "size": 951,
+      "lines": 44,
+      "signatures": []
+    },
+    {
+      "path": "config.example.yaml",
+      "size": 1274,
+      "lines": 39,
+      "signatures": []
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 606,
+      "lines": 29,
+      "signatures": []
+    },
+    {
+      "path": "jobhunter/__init__.py",
+      "size": 75,
+      "lines": 1,
+      "signatures": []
+    },
+    {
+      "path": "jobhunter/linkedin/__init__.py",
+      "size": 27,
       "lines": 1,
       "signatures": []
     }
   ],
   "_meta": {
-    "indexed_at": 1779594011,
-    "file_count": 16,
+    "indexed_at": 1779595615,
+    "file_count": 22,
     "file_hashes": {
-      "README.md": 1779585716,
+      "pyproject.toml": 1779595584,
+      "jobhunter/__init__.py": 1779595585,
+      "tests/__init__.py": 1779595585,
+      "jobhunter/linkedin/__init__.py": 1779595585,
+      "jobhunter/drive/__init__.py": 1779595585,
+      "README.md": 1779595583,
       "specs/01_inicializacion_proyecto.md": 1779589256,
       "specs/02_configuracion_yaml.md": 1779589530,
       "specs/03_autenticacion_linkedin.md": 1779589804,
@@ -185,7 +216,8 @@
       "specs/12_instalacion_primera_ejecucion.md": 1779593298,
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
-      "Documentacion/inicial/plan_accion.md": 1779588418
+      "Documentacion/inicial/plan_accion.md": 1779588418,
+      "config.example.yaml": 1779595586
     }
   }
 }
