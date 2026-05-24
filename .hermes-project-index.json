@@ -6,9 +6,9 @@
   ],
   "entry_points": [],
   "summary": {
-    "source_files": 22,
-    "total_lines": 3621,
-    "dirs_scanned": 167
+    "source_files": 24,
+    "total_lines": 3935,
+    "dirs_scanned": 195
   },
   "key_files": [
     {
@@ -95,6 +95,21 @@
       ]
     },
     {
+      "path": "tests/test_config.py",
+      "size": 6373,
+      "lines": 197,
+      "signatures": [
+        "def minimal_yaml(tmp_path):",
+        "def full_yaml(tmp_path):",
+        "class TestLoadConfigSuccess:",
+        "def test_minimal_config_loads(self, minimal_yaml):",
+        "def test_full_config_fields(self, full_yaml):",
+        "class TestLoadConfigMissingFile:",
+        "def test_missing_file_exits(self, tmp_path):",
+        "class TestLoadConfigInvalidField:"
+      ]
+    },
+    {
       "path": "specs/03_autenticacion_linkedin.md",
       "size": 7311,
       "lines": 196,
@@ -156,6 +171,21 @@
       "signatures": []
     },
     {
+      "path": "jobhunter/config.py",
+      "size": 3315,
+      "lines": 117,
+      "signatures": [
+        "class ExperienceLevel(str, Enum):",
+        "class DatePosted(str, Enum):",
+        "class JobType(str, Enum):",
+        "class SortBy(str, Enum):",
+        "class LinkedInConfig(BaseModel):",
+        "class SearchConfig(BaseModel):",
+        "class ScheduleConfig(BaseModel):",
+        "class GDriveConfig(BaseModel):"
+      ]
+    },
+    {
       "path": "Documentacion/inicial/arquitectura.md",
       "size": 5167,
       "lines": 109,
@@ -178,27 +208,16 @@
       "size": 606,
       "lines": 29,
       "signatures": []
-    },
-    {
-      "path": "jobhunter/__init__.py",
-      "size": 75,
-      "lines": 1,
-      "signatures": []
-    },
-    {
-      "path": "jobhunter/linkedin/__init__.py",
-      "size": 27,
-      "lines": 1,
-      "signatures": []
     }
   ],
   "_meta": {
-    "indexed_at": 1779595615,
-    "file_count": 22,
+    "indexed_at": 1779595892,
+    "file_count": 24,
     "file_hashes": {
-      "pyproject.toml": 1779595584,
       "jobhunter/__init__.py": 1779595585,
+      "jobhunter/config.py": 1779595738,
       "tests/__init__.py": 1779595585,
+      "tests/test_config.py": 1779595861,
       "jobhunter/linkedin/__init__.py": 1779595585,
       "jobhunter/drive/__init__.py": 1779595585,
       "README.md": 1779595583,
@@ -217,7 +236,8 @@
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
       "Documentacion/inicial/plan_accion.md": 1779588418,
-      "config.example.yaml": 1779595586
+      "config.example.yaml": 1779595586,
+      "pyproject.toml": 1779595584
     }
   }
 }
