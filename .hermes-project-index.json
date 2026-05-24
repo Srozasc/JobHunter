@@ -6,9 +6,9 @@
   ],
   "entry_points": [],
   "summary": {
-    "source_files": 30,
-    "total_lines": 4890,
-    "dirs_scanned": 241
+    "source_files": 34,
+    "total_lines": 5301,
+    "dirs_scanned": 267
   },
   "key_files": [
     {
@@ -194,6 +194,21 @@
       ]
     },
     {
+      "path": "tests/test_drive.py",
+      "size": 7088,
+      "lines": 170,
+      "signatures": [
+        "class TestGenerateCsv:",
+        "def _make_offer(self, **kwargs):",
+        "def test_header_columns(self):",
+        "def test_bom_present(self):",
+        "def test_single_offer_row(self):",
+        "def test_multiple_offers(self):",
+        "def test_empty_description(self):",
+        "def test_empty_offers_list(self):"
+      ]
+    },
+    {
       "path": "specs/01_inicializacion_proyecto.md",
       "size": 5120,
       "lines": 147,
@@ -226,30 +241,31 @@
         "async def get_text(element) -> str:",
         "async def get_attribute(element, attr: str) -> str:"
       ]
-    },
-    {
-      "path": "jobhunter/config.py",
-      "size": 3315,
-      "lines": 117,
-      "signatures": [
-        "class ExperienceLevel(str, Enum):",
-        "class DatePosted(str, Enum):",
-        "class JobType(str, Enum):",
-        "class SortBy(str, Enum):",
-        "class LinkedInConfig(BaseModel):",
-        "class SearchConfig(BaseModel):",
-        "class ScheduleConfig(BaseModel):",
-        "class GDriveConfig(BaseModel):"
-      ]
     }
   ],
   "_meta": {
-    "indexed_at": 1779596390,
-    "file_count": 30,
+    "indexed_at": 1779596675,
+    "file_count": 34,
     "file_hashes": {
       "config.example.yaml": 1779595586,
       "pyproject.toml": 1779595584,
+      "jobhunter/__init__.py": 1779595585,
+      "jobhunter/config.py": 1779595738,
+      "jobhunter/dedup.py": 1779596341,
+      "tests/__init__.py": 1779595585,
+      "tests/test_config.py": 1779595861,
+      "tests/test_scraper.py": 1779596163,
+      "tests/test_dedup.py": 1779596342,
+      "tests/test_drive.py": 1779596547,
+      "jobhunter/linkedin/__init__.py": 1779595585,
+      "jobhunter/linkedin/selectors.py": 1779596094,
+      "jobhunter/linkedin/auth.py": 1779596094,
+      "jobhunter/linkedin/scraper.py": 1779596094,
+      "jobhunter/drive/__init__.py": 1779595585,
+      "jobhunter/drive/uploader.py": 1779596547,
+      "jobhunter/drive/auth.py": 1779596547,
       "README.md": 1779595583,
+      "Documentacion/setup_google_drive.md": 1779596646,
       "specs/01_inicializacion_proyecto.md": 1779589256,
       "specs/02_configuracion_yaml.md": 1779589530,
       "specs/03_autenticacion_linkedin.md": 1779589804,
@@ -264,19 +280,7 @@
       "specs/12_instalacion_primera_ejecucion.md": 1779593298,
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
-      "Documentacion/inicial/plan_accion.md": 1779588418,
-      "jobhunter/__init__.py": 1779595585,
-      "jobhunter/config.py": 1779595738,
-      "jobhunter/dedup.py": 1779596341,
-      "tests/__init__.py": 1779595585,
-      "tests/test_config.py": 1779595861,
-      "tests/test_scraper.py": 1779596163,
-      "tests/test_dedup.py": 1779596342,
-      "jobhunter/linkedin/__init__.py": 1779595585,
-      "jobhunter/linkedin/selectors.py": 1779596094,
-      "jobhunter/linkedin/auth.py": 1779596094,
-      "jobhunter/linkedin/scraper.py": 1779596094,
-      "jobhunter/drive/__init__.py": 1779595585
+      "Documentacion/inicial/plan_accion.md": 1779588418
     }
   }
 }
