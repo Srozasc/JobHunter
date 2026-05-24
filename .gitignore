@@ -1,0 +1,44 @@
+# Archivos de configuración local (contienen credenciales y rutas privadas)
+config.yaml
+credentials.json
+token.json
+
+# Datos locales (sesiones, historial)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+
+# Entornos virtuales y editores
+.env
+.venv/
+.idea/
+.vim
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Playwright
+playwright-report/
+test-results/
+
+# Logs
+*.log
+
+# Misc
+specs/   # ← No ignorar specs (se sube a GitHub)
+Documentacion/  # ← No ignorar documentación (se sube a GitHub)
+README.md  # ← No ignorar README
