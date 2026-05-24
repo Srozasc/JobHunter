@@ -4,11 +4,161 @@
   "frameworks": [],
   "entry_points": [],
   "summary": {
-    "source_files": 1,
-    "total_lines": 1,
-    "dirs_scanned": 51
+    "source_files": 16,
+    "total_lines": 3507,
+    "dirs_scanned": 122
   },
   "key_files": [
+    {
+      "path": "Documentacion/inicial/plan_accion.md",
+      "size": 13108,
+      "lines": 423,
+      "signatures": []
+    },
+    {
+      "path": "specs/05_scraping_ofertas.md",
+      "size": 11602,
+      "lines": 329,
+      "signatures": [
+        "def _build_search_url(search) -> str:",
+        "async def scrape_offers(ctx, search) -> list[dict]:",
+        "async def _extract_offer_data(page, card) -> dict:",
+        "async def _safe_text(parent, key: str) -> str:",
+        "async def _safe_attr(parent, key: str, attr: str) -> str:",
+        "async def _extract_description(ctx, url: str) -> str:",
+        "async def _go_to_next_page(page) -> bool:"
+      ]
+    },
+    {
+      "path": "specs/10_cli_main.md",
+      "size": 12227,
+      "lines": 324,
+      "signatures": [
+        "def get_config() -> AppConfig:",
+        "@app.command()",
+        "def init(",
+        "@app.command()",
+        "def login(",
+        "@app.command()",
+        "def run(",
+        "@app.command()"
+      ]
+    },
+    {
+      "path": "Documentacion/inicial/especificacion_caracteristicas.md",
+      "size": 13519,
+      "lines": 318,
+      "signatures": []
+    },
+    {
+      "path": "specs/09_scheduler.md",
+      "size": 9812,
+      "lines": 266,
+      "signatures": [
+        "class FrequencyType(str, Enum):",
+        "def parse_every_hours(frequency: str) -> int | None:",
+        "def run_job(config: AppConfig) -> None:",
+        "def start_scheduler(config: AppConfig) -> None:",
+        "def run_job_wrapper(config: AppConfig) -> None:",
+        "def generate_crontab(config: AppConfig) -> str:"
+      ]
+    },
+    {
+      "path": "specs/04_selectores_dom.md",
+      "size": 8777,
+      "lines": 241,
+      "signatures": [
+        "class ElementNotFoundError(Exception):",
+        "def __init__(self, key, selectors_tried, url):",
+        "async def find_elements(page, key: str) -> list:",
+        "async def find_element(page, key: str):",
+        "async def get_text(element) -> str:",
+        "async def get_attribute(element, attr: str) -> str:",
+        "async def verify():"
+      ]
+    },
+    {
+      "path": "specs/11_documentacion.md",
+      "size": 7460,
+      "lines": 226,
+      "signatures": []
+    },
+    {
+      "path": "specs/08_google_drive_uploader.md",
+      "size": 7445,
+      "lines": 203,
+      "signatures": [
+        "def generate_csv(offers: list[dict]) -> io.StringIO:",
+        "def upload_csv("
+      ]
+    },
+    {
+      "path": "specs/03_autenticacion_linkedin.md",
+      "size": 7311,
+      "lines": 196,
+      "signatures": [
+        "async def ensure_session(",
+        "async def _load_session(session_file: str, headless: bool) -> BrowserContext:",
+        "async def _is_session_valid(ctx: BrowserContext) -> bool:",
+        "async def _login_flow(session_file: str, headless: bool) -> BrowserContext:"
+      ]
+    },
+    {
+      "path": "specs/07_google_drive_auth.md",
+      "size": 7781,
+      "lines": 193,
+      "signatures": [
+        "def get_drive_service(",
+        "def _load_or_refresh_credentials(credentials_file: str, token_file: str) -> Credentials:",
+        "def _load_token(token_file: str) -> Credentials | None:",
+        "def _perform_oauth_flow(credentials_file: str, token_file: str) -> Credentials:",
+        "def _save_token(creds: Credentials, token_file: str) -> None:"
+      ]
+    },
+    {
+      "path": "specs/06_deduplicacion.md",
+      "size": 6662,
+      "lines": 179,
+      "signatures": [
+        "def normalize_url(url: str) -> str:",
+        "def load_history(path: str) -> dict:",
+        "def filter_new_offers(offers: list[dict], history: dict) -> tuple[list[dict], dict]:",
+        "def save_history(history: dict, path: str) -> None:"
+      ]
+    },
+    {
+      "path": "specs/12_instalacion_primera_ejecucion.md",
+      "size": 7075,
+      "lines": 178,
+      "signatures": []
+    },
+    {
+      "path": "specs/02_configuracion_yaml.md",
+      "size": 5908,
+      "lines": 174,
+      "signatures": [
+        "class ExperienceLevel(str, Enum):",
+        "class DatePosted(str, Enum):",
+        "class JobType(str, Enum):",
+        "class Frequency(str, Enum):",
+        "class LinkedInConfig(BaseModel):",
+        "class SearchConfig(BaseModel):",
+        "class ScheduleConfig(BaseModel):",
+        "class GDriveConfig(BaseModel):"
+      ]
+    },
+    {
+      "path": "specs/01_inicializacion_proyecto.md",
+      "size": 5120,
+      "lines": 147,
+      "signatures": []
+    },
+    {
+      "path": "Documentacion/inicial/arquitectura.md",
+      "size": 5167,
+      "lines": 109,
+      "signatures": []
+    },
     {
       "path": "README.md",
       "size": 12,
@@ -17,10 +167,25 @@
     }
   ],
   "_meta": {
-    "indexed_at": 1779585718,
-    "file_count": 1,
+    "indexed_at": 1779594011,
+    "file_count": 16,
     "file_hashes": {
-      "README.md": 1779585716
+      "README.md": 1779585716,
+      "specs/01_inicializacion_proyecto.md": 1779589256,
+      "specs/02_configuracion_yaml.md": 1779589530,
+      "specs/03_autenticacion_linkedin.md": 1779589804,
+      "specs/04_selectores_dom.md": 1779590113,
+      "specs/05_scraping_ofertas.md": 1779590424,
+      "specs/06_deduplicacion.md": 1779591959,
+      "specs/07_google_drive_auth.md": 1779592078,
+      "specs/08_google_drive_uploader.md": 1779592267,
+      "specs/09_scheduler.md": 1779592542,
+      "specs/10_cli_main.md": 1779592826,
+      "specs/11_documentacion.md": 1779593046,
+      "specs/12_instalacion_primera_ejecucion.md": 1779593298,
+      "Documentacion/inicial/arquitectura.md": 1779588060,
+      "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
+      "Documentacion/inicial/plan_accion.md": 1779588418
     }
   }
 }
