@@ -1,0 +1,39 @@
+# JobHunter - Configuración de ejemplo
+# Copia este archivo como `config.yaml` y ajusta los valores.
+
+linkedin:
+  session_file: data/session/linkedin_session.json
+  headless: true  # true = sin navegador visible; false = abre ventana
+
+search:
+  keywords: "python developer"
+  location: "Chile"
+  # Nivel de experiencia (puedes listar varios):
+  #   entry | associate | mid_senior | director | executive
+  experience_level:
+    - associate
+    - mid_senior
+  # Fecha de publicación: past_24h | past_week | past_month
+  date_posted: past_week
+  # Tipo de empleo (puedes listar varios):
+  #   full_time | part_time | contract | temporary | internship
+  job_type:
+    - full_time
+  remote: false
+  max_results: 100       # máximo de ofertas a recolectar
+  sort_by: recent        # recent | relevant
+
+schedule:
+  enabled: true
+  frequency: daily       # daily | weekly | every_Xh
+  every_hours: 24        # usado si frequency es "every_Xh"
+  hour: "09:00"          # formato HH:MM
+
+google_drive:
+  credentials_file: "credentials.json"   # OAuth2 descargado de GCP
+  token_file: "token.json"               # auto-generado por OAuth2
+  folder_id: ""                          # vacío = raíz
+  filename_prefix: "ofertas"
+
+dedup:
+  history_file: data/history/offers_history.json

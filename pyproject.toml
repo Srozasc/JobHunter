@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jobhunter"
+version = "0.1.0"
+description = "Recopilador automatizado de ofertas de empleo desde LinkedIn"
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.40",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "typer>=0.9",
+    "loguru>=0.7",
+    "google-api-python-client>=2.100",
+    "google-auth-oauthlib>=1.0",
+    "schedule>=1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.23",
+    "pytest-mock>=3.12",
+]
+
+[project.scripts]
+jobhunter = "jobhunter.main:app"
