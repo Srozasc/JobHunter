@@ -6,9 +6,9 @@
   ],
   "entry_points": [],
   "summary": {
-    "source_files": 24,
-    "total_lines": 3935,
-    "dirs_scanned": 195
+    "source_files": 28,
+    "total_lines": 4574,
+    "dirs_scanned": 223
   },
   "key_files": [
     {
@@ -63,6 +63,20 @@
         "def start_scheduler(config: AppConfig) -> None:",
         "def run_job_wrapper(config: AppConfig) -> None:",
         "def generate_crontab(config: AppConfig) -> str:"
+      ]
+    },
+    {
+      "path": "jobhunter/linkedin/scraper.py",
+      "size": 8092,
+      "lines": 253,
+      "signatures": [
+        "def build_search_url(search: SearchConfig) -> str:",
+        "async def scrape_offers(ctx, search: SearchConfig) -> list[dict]:",
+        "async def _extract_offer_data(ctx, card) -> dict:",
+        "async def _safe_text(parent, key: str) -> str:",
+        "async def _safe_attr(parent, key: str, attr: str) -> str:",
+        "async def _extract_description(ctx, url: str) -> str:",
+        "async def _go_to_next_page(page) -> bool:"
       ]
     },
     {
@@ -171,6 +185,34 @@
       "signatures": []
     },
     {
+      "path": "tests/test_scraper.py",
+      "size": 5031,
+      "lines": 139,
+      "signatures": [
+        "class TestBuildSearchUrl:",
+        "def test_basic_keywords_and_location(self):",
+        "def test_url_encoding(self):",
+        "def test_date_posted_past_week(self):",
+        "def test_date_posted_past_24h(self):",
+        "def test_date_posted_past_month(self):",
+        "def test_experience_level_single(self):",
+        "def test_experience_level_multiple(self):"
+      ]
+    },
+    {
+      "path": "jobhunter/linkedin/selectors.py",
+      "size": 4282,
+      "lines": 132,
+      "signatures": [
+        "class ElementNotFoundError(Exception):",
+        "def __init__(self, key: str, selectors_tried: list[str], url: str):",
+        "async def find_elements(page, key: str) -> list:",
+        "async def find_element(page, key: str):",
+        "async def get_text(element) -> str:",
+        "async def get_attribute(element, attr: str) -> str:"
+      ]
+    },
+    {
       "path": "jobhunter/config.py",
       "size": 3315,
       "lines": 117,
@@ -186,40 +228,34 @@
       ]
     },
     {
-      "path": "Documentacion/inicial/arquitectura.md",
-      "size": 5167,
-      "lines": 109,
-      "signatures": []
-    },
-    {
-      "path": "README.md",
-      "size": 951,
-      "lines": 44,
-      "signatures": []
-    },
-    {
-      "path": "config.example.yaml",
-      "size": 1274,
-      "lines": 39,
-      "signatures": []
-    },
-    {
-      "path": "pyproject.toml",
-      "size": 606,
-      "lines": 29,
-      "signatures": []
+      "path": "jobhunter/linkedin/auth.py",
+      "size": 4180,
+      "lines": 115,
+      "signatures": [
+        "async def ensure_session(",
+        "async def _load_session(session_file: str, headless: bool) -> BrowserContext:",
+        "async def _is_session_valid(ctx: BrowserContext) -> bool:",
+        "async def _login_flow(session_file: str, headless: bool) -> BrowserContext:",
+        "async def _close_context(ctx: BrowserContext) -> None:"
+      ]
     }
   ],
   "_meta": {
-    "indexed_at": 1779595892,
-    "file_count": 24,
+    "indexed_at": 1779596211,
+    "file_count": 28,
     "file_hashes": {
+      "config.example.yaml": 1779595586,
       "jobhunter/__init__.py": 1779595585,
       "jobhunter/config.py": 1779595738,
       "tests/__init__.py": 1779595585,
       "tests/test_config.py": 1779595861,
+      "tests/test_scraper.py": 1779596163,
       "jobhunter/linkedin/__init__.py": 1779595585,
+      "jobhunter/linkedin/selectors.py": 1779596094,
+      "jobhunter/linkedin/auth.py": 1779596094,
+      "jobhunter/linkedin/scraper.py": 1779596094,
       "jobhunter/drive/__init__.py": 1779595585,
+      "pyproject.toml": 1779595584,
       "README.md": 1779595583,
       "specs/01_inicializacion_proyecto.md": 1779589256,
       "specs/02_configuracion_yaml.md": 1779589530,
@@ -235,9 +271,7 @@
       "specs/12_instalacion_primera_ejecucion.md": 1779593298,
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
-      "Documentacion/inicial/plan_accion.md": 1779588418,
-      "config.example.yaml": 1779595586,
-      "pyproject.toml": 1779595584
+      "Documentacion/inicial/plan_accion.md": 1779588418
     }
   }
 }
