@@ -6,9 +6,9 @@
   ],
   "entry_points": [],
   "summary": {
-    "source_files": 34,
-    "total_lines": 5301,
-    "dirs_scanned": 267
+    "source_files": 36,
+    "total_lines": 5689,
+    "dirs_scanned": 285
   },
   "key_files": [
     {
@@ -194,6 +194,18 @@
       ]
     },
     {
+      "path": "jobhunter/scheduler.py",
+      "size": 5902,
+      "lines": 173,
+      "signatures": [
+        "def parse_every_hours(frequency: str) -> int | None:",
+        "def run_job(config: AppConfig) -> None:",
+        "def start_scheduler(config: AppConfig) -> None:",
+        "def _run_job_safe(config: AppConfig) -> None:",
+        "def generate_crontab(config: AppConfig) -> str:"
+      ]
+    },
+    {
       "path": "tests/test_drive.py",
       "size": 7088,
       "lines": 170,
@@ -228,42 +240,14 @@
         "def test_experience_level_single(self):",
         "def test_experience_level_multiple(self):"
       ]
-    },
-    {
-      "path": "jobhunter/linkedin/selectors.py",
-      "size": 4282,
-      "lines": 132,
-      "signatures": [
-        "class ElementNotFoundError(Exception):",
-        "def __init__(self, key: str, selectors_tried: list[str], url: str):",
-        "async def find_elements(page, key: str) -> list:",
-        "async def find_element(page, key: str):",
-        "async def get_text(element) -> str:",
-        "async def get_attribute(element, attr: str) -> str:"
-      ]
     }
   ],
   "_meta": {
-    "indexed_at": 1779596675,
-    "file_count": 34,
+    "indexed_at": 1779597178,
+    "file_count": 36,
     "file_hashes": {
       "config.example.yaml": 1779595586,
       "pyproject.toml": 1779595584,
-      "jobhunter/__init__.py": 1779595585,
-      "jobhunter/config.py": 1779595738,
-      "jobhunter/dedup.py": 1779596341,
-      "tests/__init__.py": 1779595585,
-      "tests/test_config.py": 1779595861,
-      "tests/test_scraper.py": 1779596163,
-      "tests/test_dedup.py": 1779596342,
-      "tests/test_drive.py": 1779596547,
-      "jobhunter/linkedin/__init__.py": 1779595585,
-      "jobhunter/linkedin/selectors.py": 1779596094,
-      "jobhunter/linkedin/auth.py": 1779596094,
-      "jobhunter/linkedin/scraper.py": 1779596094,
-      "jobhunter/drive/__init__.py": 1779595585,
-      "jobhunter/drive/uploader.py": 1779596547,
-      "jobhunter/drive/auth.py": 1779596547,
       "README.md": 1779595583,
       "Documentacion/setup_google_drive.md": 1779596646,
       "specs/01_inicializacion_proyecto.md": 1779589256,
@@ -280,7 +264,24 @@
       "specs/12_instalacion_primera_ejecucion.md": 1779593298,
       "Documentacion/inicial/arquitectura.md": 1779588060,
       "Documentacion/inicial/especificacion_caracteristicas.md": 1779588247,
-      "Documentacion/inicial/plan_accion.md": 1779588418
+      "Documentacion/inicial/plan_accion.md": 1779588418,
+      "jobhunter/__init__.py": 1779595585,
+      "jobhunter/config.py": 1779595738,
+      "jobhunter/dedup.py": 1779596341,
+      "jobhunter/scheduler.py": 1779596807,
+      "jobhunter/main.py": 1779596909,
+      "tests/__init__.py": 1779595585,
+      "tests/test_config.py": 1779595861,
+      "tests/test_scraper.py": 1779596163,
+      "tests/test_dedup.py": 1779596342,
+      "tests/test_drive.py": 1779596547,
+      "jobhunter/linkedin/__init__.py": 1779595585,
+      "jobhunter/linkedin/selectors.py": 1779596094,
+      "jobhunter/linkedin/auth.py": 1779596094,
+      "jobhunter/linkedin/scraper.py": 1779596094,
+      "jobhunter/drive/__init__.py": 1779595585,
+      "jobhunter/drive/uploader.py": 1779596547,
+      "jobhunter/drive/auth.py": 1779596547
     }
   }
 }
