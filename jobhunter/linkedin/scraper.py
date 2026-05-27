@@ -91,6 +91,7 @@ async def scrape_offers(ctx, search: SearchConfig) -> list[dict]:
     Retorna lista de dicts con: id, title, company, location, url,
     description, date_posted, scraped_at.
     """
+    from playwright.async_api import TimeoutError as PlaywrightTimeoutError
     from jobhunter.linkedin.selectors import find_elements, SELECTORS
 
     url = build_search_url(search)
@@ -101,9 +102,11 @@ async def scrape_offers(ctx, search: SearchConfig) -> list[dict]:
     page_num = 0
 
     try:
-        await page.goto(url, wait_until="networkidle", timeout=30000)
-    except asyncio.TimeoutError:
-        logger.error(f"Timeout cargando la primera página: {url}")
+        await page.goto(url, wait_until="load", timeout=30000)
+    except (asyncio.TimeoutError, PlaywrightTimeoutError):
+        logger.error(f"Timeout cargando la primera página: {url}. Intentando continuar...")
+    except Exception as e:
+        logger.error(f"Error inesperado cargando página inicial: {e}")
         await page.close()
         return []
 
@@ -151,6 +154,11 @@ async def _extract_offer_data(ctx, card) -> dict:
     company = (await _safe_text(card, "company"))[:200]
     location = (await _safe_text(card, "location"))[:200]
     url = await _safe_attr(card, "url", "href") or ""
+    
+    # Normalizar URL relativa a absoluta
+    if url and url.startswith("/"):
+        url = f"https://www.linkedin.com{url}"
+        
     dt_attr = await _safe_attr(card, "date_posted", "datetime")
     date_posted = dt_attr or (await _safe_text(card, "date_posted"))[:50]
 
@@ -211,8 +219,9 @@ async def _extract_description(ctx, url: str) -> str:
     await asyncio.sleep(random.uniform(2.0, 4.0))
 
     page = await ctx.new_page()
+    from playwright.async_api import TimeoutError as PlaywrightTimeoutError
     try:
-        await page.goto(url, wait_until="networkidle", timeout=30000)
+        await page.goto(url, wait_until="domcontentloaded", timeout=20000)
         for selector in SELECTORS.get("description", []):
             el = await page.query_selector(selector)
             if el:
@@ -220,7 +229,7 @@ async def _extract_description(ctx, url: str) -> str:
                 if text and len(text.strip()) > 50:
                     return text.strip()[:2000]
         return ""
-    except asyncio.TimeoutError:
+    except (asyncio.TimeoutError, PlaywrightTimeoutError):
         logger.debug(f"Timeout extrayendo descripción: {url}")
         return ""
     except Exception as e:
@@ -237,6 +246,7 @@ async def _go_to_next_page(page) -> bool:
     """Intenta avanzar a la siguiente página. Retorna True si lo logró."""
     from jobhunter.linkedin.selectors import SELECTORS
 
+    from playwright.async_api import TimeoutError as PlaywrightTimeoutError
     for selector in SELECTORS.get("next_page_btn", []):
         btn = await page.query_selector(selector)
         if btn:
@@ -245,9 +255,9 @@ async def _go_to_next_page(page) -> bool:
                 return False
             await btn.click()
             try:
-                await page.wait_for_load_state("networkidle", timeout=30000)
+                await page.wait_for_load_state("domcontentloaded", timeout=15000)
                 return True
-            except asyncio.TimeoutError:
+            except (asyncio.TimeoutError, PlaywrightTimeoutError):
                 logger.warning("Timeout esperando siguiente página")
                 return False
     return False

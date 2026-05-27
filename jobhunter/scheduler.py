@@ -24,6 +24,32 @@ def parse_every_hours(frequency: str) -> int | None:
     return None
 
 
+async def _run_job_async(config: AppConfig) -> list[dict]:
+    """Orquesta las partes asíncronas de Playwright en el mismo event loop."""
+    # 1. Autenticación LinkedIn
+    logger.info("Paso 1/4: Autenticación LinkedIn...")
+    ctx = await ensure_session(
+        session_file=config.linkedin.session_file,
+        headless=config.linkedin.headless,
+    )
+
+    try:
+        # 2. Scraping
+        logger.info("Paso 2/4: Scraping de ofertas...")
+        offers = await scrape_offers(ctx, config.search)
+        return offers
+    finally:
+        # Cerrar contexto del browser
+        try:
+            await ctx.browser.close()
+        except Exception:
+            pass
+        try:
+            await ctx._playwright.stop()
+        except Exception:
+            pass
+
+
 def run_job(config: AppConfig) -> None:
     """Ejecuta el flujo completo: auth → scrape → dedup → upload."""
     logger.info("=" * 50)
@@ -31,30 +57,13 @@ def run_job(config: AppConfig) -> None:
     start = time.time()
 
     try:
-        # 1. Autenticación LinkedIn
-        logger.info("Paso 1/4: Autenticación LinkedIn...")
-        ctx = asyncio.run(
-            ensure_session(
-                session_file=config.linkedin.session_file,
-                headless=config.linkedin.headless,
-            )
-        )
-
-        # 2. Scraping
-        logger.info("Paso 2/4: Scraping de ofertas...")
-        offers = asyncio.run(scrape_offers(ctx, config.search))
-
-        # Cerrar contexto del browser
-        try:
-            asyncio.run(ctx.close())
-        except Exception:
-            pass
+        offers = asyncio.run(_run_job_async(config))
 
         if not offers:
             logger.warning("No se encontraron ofertas en esta ejecución.")
             return
 
-        logger.info(f"  {len(ofertas)} ofertas encontradas en LinkedIn.")
+        logger.info(f"  {len(offers)} ofertas encontradas en LinkedIn.")
 
         # 3. Deduplicación
         logger.info("Paso 3/4: Deduplicación...")

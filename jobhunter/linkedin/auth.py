@@ -47,7 +47,8 @@ async def _load_session(session_file: str, headless: bool) -> BrowserContext:
     """Carga sesión desde archivo storage_state."""
     playwright = await async_playwright().start()
     browser = await playwright.chromium.launch(headless=headless)
-    ctx = await browser.new_context(storage_state=session_file)
+    session_abs = str(Path(session_file).resolve())
+    ctx = await browser.new_context(storage_state=session_abs)
     # Guardar referencia para cerrar después
     ctx._playwright = playwright  # type: ignore[attr-defined]
     return ctx
@@ -57,7 +58,9 @@ async def _is_session_valid(ctx: BrowserContext) -> bool:
     """Verifica si la sesión es válida navegando al feed."""
     page = await ctx.new_page()
     try:
-        await page.goto(LINKEDIN_FEED_URL, wait_until="networkidle", timeout=30000)
+        await page.goto(LINKEDIN_FEED_URL, wait_until="domcontentloaded", timeout=20000)
+        # Esperar un par de segundos para permitir cualquier redirección automática a /login
+        await page.wait_for_timeout(2000)
         final_url = page.url
         is_valid = "/login" not in final_url and "/checkpoint" not in final_url
         if not is_valid:
@@ -93,11 +96,17 @@ async def _login_flow(session_file: str, headless: bool) -> BrowserContext:
         raise RuntimeError("Login timeout: no se detectó inicio de sesión en 5 minutos.")
 
     # Guardar sesión
-    session_path = Path(session_file)
+    session_path = Path(session_file).resolve()
     session_path.parent.mkdir(parents=True, exist_ok=True)
-    await ctx.storage_state(path=session_file)
-    os.chmod(session_file, stat.S_IRUSR | stat.S_IWUSR)  # 0600
-    logger.info(f"Sesión guardada en {session_file} (permisos 0600)")
+    
+    # Escribir usando ruta absoluta
+    await ctx.storage_state(path=str(session_path))
+    try:
+        os.chmod(str(session_path), stat.S_IRUSR | stat.S_IWUSR)  # 0600
+    except Exception:
+        # En Windows, chmod a veces arroja excepciones según el sistema de archivos
+        pass
+    logger.info(f"Sesión guardada en {session_path} (permisos configurados)")
 
     await page.close()
     return ctx
